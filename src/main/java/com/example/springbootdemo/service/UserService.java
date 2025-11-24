@@ -31,12 +31,7 @@ public class UserService {
     public ResponseUserDTO getUser(Integer id) {
         for (User u : users) {
             if (u.getId() == id) {
-                ResponseUserDTO newResponseUserDTO = new ResponseUserDTO(
-                       u.getId(),
-                       u.getName(),
-                       u.getAge(),
-                       u.getEmail()
-                );
+                ResponseUserDTO newResponseUserDTO = new ResponseUserDTO(u);
                 return newResponseUserDTO;
             }
         }
@@ -47,12 +42,7 @@ public class UserService {
 
         List<ResponseUserDTO> responseList = new ArrayList<>();
         for (User u : users) {
-            responseList.add(new ResponseUserDTO(
-                    u.getId(),
-                    u.getName(),
-                    u.getAge(),
-                    u.getEmail()
-            ));
+            responseList.add(new ResponseUserDTO(u));
         }
 
         return responseList;

@@ -1,5 +1,7 @@
 package com.example.springbootdemo.api.model;
 
+import com.example.springbootdemo.dto.CreateUserDTO;
+
 public class User {
 
     private int id;
@@ -15,6 +17,15 @@ public class User {
         this.email = email;
         this.password = password;
     }
+
+    public User(int id, CreateUserDTO createUserDTO) {
+        this.id = id;
+        this.name = createUserDTO.getName();
+        this.age = createUserDTO.getAge();
+        this.email = createUserDTO.getEmail();
+        this.password = createUserDTO.getPassword();
+    }
+
 
     public int getId() {
         return id;

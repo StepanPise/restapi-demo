@@ -23,13 +23,7 @@ public class UserController {
 
     @PostMapping
     public User addUser(@Valid @RequestBody CreateUserDTO createUserDTO) {
-        User newUser = new User(
-            userService.generateID(),
-            createUserDTO.getName(),
-            createUserDTO.getAge(),
-            createUserDTO.getEmail(),
-            createUserDTO.getPassword()
-        );
+        User newUser = new User(userService.generateID(), createUserDTO);
 
         return userService.addUser(newUser);
     }
