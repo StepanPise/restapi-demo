@@ -13,8 +13,8 @@ public class UserService {
     private List<User> users = new ArrayList<>();
 
     public UserService() {
-        users.add(new User(1,"Eric",22,"user1@mail.cz"));
-        users.add(new User(2, "Alice", 33, "user2@mail.cz"));
+        users.add(new User(1,"Eric",22,"user1@mail.cz" ,"heslo123"));
+        users.add(new User(2, "Alice", 33, "user2@mail.cz", "heslo123"));
     }
 
     public User getUser(Integer id) {
@@ -25,6 +25,7 @@ public class UserService {
         }
         return null;
     }
+
     public List<User> getAllUsers() {
         return users;
     }
