@@ -2,6 +2,7 @@ package com.example.springbootdemo.service;
 
 import com.example.springbootdemo.api.model.User;
 import com.example.springbootdemo.dto.ResponseUserDTO;
+import com.example.springbootdemo.dto.UpdateUserDTO;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -52,4 +53,28 @@ public class UserService {
         users.add(user);
         return user;
     }
+
+    public void deleteUser(Integer id) {
+        for (User u : users) {
+            if (u.getId() == id) {
+                users.remove(u);
+            }
+        }
+    }
+
+    public User updateUser(Integer id, UpdateUserDTO updateUserDTO) {
+        for (int i = 0; i < users.size(); i++) {
+            if(users.get(i).getId() == id) {
+
+                User newUser = new User(id,updateUserDTO);
+
+                users.set(i, newUser);
+                return newUser;
+            }
+        }
+        return null;
+    }
+
+
+
 }

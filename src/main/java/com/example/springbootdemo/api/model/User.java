@@ -1,6 +1,7 @@
 package com.example.springbootdemo.api.model;
 
 import com.example.springbootdemo.dto.CreateUserDTO;
+import com.example.springbootdemo.dto.UpdateUserDTO;
 
 public class User {
 
@@ -24,6 +25,14 @@ public class User {
         this.age = createUserDTO.getAge();
         this.email = createUserDTO.getEmail();
         this.password = createUserDTO.getPassword();
+    }
+
+    public User(int id, UpdateUserDTO updateUserDTO) {
+        this.id = id;
+        this.name = updateUserDTO.getName();
+        this.age = updateUserDTO.getAge();
+        this.email = updateUserDTO.getEmail();
+        this.password = updateUserDTO.getPassword();
     }
 
 
