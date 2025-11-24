@@ -1,10 +1,20 @@
 package com.example.springbootdemo.dto;
 
+import jakarta.validation.constraints.*;
+
 public class CreateUserDTO {
 
+    @NotBlank
     private String name;
+
+    @Min(value = 0)
     private int age;
+
+    @Email
+    @NotBlank
     private String email;
+
+    @NotBlank
     private String password;
 
     public CreateUserDTO(){
