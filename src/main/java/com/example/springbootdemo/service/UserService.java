@@ -13,11 +13,10 @@ import java.util.List;
 @Service
 public class UserService {
 
-    private List<User> users = new ArrayList<>();
+    private final UserRepository userRepository;
 
-    public UserService() {
-        users.add(new User(1,"Eric",22,"user1@mail.cz" ,"heslo123"));
-        users.add(new User(2, "Alice", 33, "user2@mail.cz", "heslo123"));
+    public UserService(UserRepository userRepository) {
+        this.userRepository = userRepository;
     }
 
     public int generateID() {
