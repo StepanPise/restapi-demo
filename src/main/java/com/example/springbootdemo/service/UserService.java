@@ -1,6 +1,7 @@
 package com.example.springbootdemo.service;
 
 import com.example.springbootdemo.api.model.User;
+import com.example.springbootdemo.dto.ResponseUserDTO;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -17,17 +18,44 @@ public class UserService {
         users.add(new User(2, "Alice", 33, "user2@mail.cz", "heslo123"));
     }
 
-    public User getUser(Integer id) {
+    public int generateID() {
+        int maxId = 0;
+        for (User u : users) {
+            if (u.getId() > maxId) {
+                maxId = u.getId();
+            }
+        }
+        return maxId + 1;
+    }
+
+    public ResponseUserDTO getUser(Integer id) {
         for (User u : users) {
             if (u.getId() == id) {
-                return u;
+                ResponseUserDTO newResponseUserDTO = new ResponseUserDTO(
+                       u.getId(),
+                       u.getName(),
+                       u.getAge(),
+                       u.getEmail()
+                );
+                return newResponseUserDTO;
             }
         }
         return null;
     }
 
-    public List<User> getAllUsers() {
-        return users;
+    public List<ResponseUserDTO> getAllUsers() {
+
+        List<ResponseUserDTO> responseList = new ArrayList<>();
+        for (User u : users) {
+            responseList.add(new ResponseUserDTO(
+                    u.getId(),
+                    u.getName(),
+                    u.getAge(),
+                    u.getEmail()
+            ));
+        }
+
+        return responseList;
     }
 
     public User addUser(User user) {

@@ -1,5 +1,7 @@
 package com.example.springbootdemo.api.controller;
 
+import com.example.springbootdemo.dto.CreateUserDTO;
+import com.example.springbootdemo.dto.ResponseUserDTO;
 import com.example.springbootdemo.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -18,18 +20,26 @@ public class UserController {
         this.userService = userService;
     }
 
+    @PostMapping
+    public User addUser(@RequestBody CreateUserDTO createUserDTO) {
+        User newUser = new User(
+            userService.generateID(),
+            createUserDTO.getName(),
+            createUserDTO.getAge(),
+            createUserDTO.getEmail(),
+            createUserDTO.getPassword()
+        );
+
+        return userService.addUser(newUser);
+    }
+
     @GetMapping
-    public List<User> getAllUsers() {
+    public List<ResponseUserDTO> getAllUsers() {
         return userService.getAllUsers();
     }
 
-    @PostMapping
-    public User addUser(@RequestBody User user) {
-        return userService.addUser(user);
-    }
-
     @GetMapping("/{id}")
-    public User getUser(@PathVariable Integer id) {
+    public ResponseUserDTO getUser(@PathVariable Integer id) {
         return userService.getUser(id);
     }
 }
