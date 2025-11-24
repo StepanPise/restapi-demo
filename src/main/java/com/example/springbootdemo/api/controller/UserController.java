@@ -5,7 +5,6 @@ import com.example.springbootdemo.dto.ResponseUserDTO;
 import com.example.springbootdemo.dto.UpdateUserDTO;
 import com.example.springbootdemo.service.UserService;
 import jakarta.validation.Valid;
-import org.hibernate.sql.Update;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import com.example.springbootdemo.api.model.User;
@@ -46,7 +45,7 @@ public class UserController {
     }
 
     @PutMapping("/{id}")
-    public User updateUser(@PathVariable Integer id,@RequestBody UpdateUserDTO updateUserDTO) {
+    public User updateUser(@PathVariable Integer id,@Valid @RequestBody UpdateUserDTO updateUserDTO) {
         return userService.updateUser(id,updateUserDTO);
     }
 }

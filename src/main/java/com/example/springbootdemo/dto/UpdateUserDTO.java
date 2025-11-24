@@ -1,6 +1,5 @@
 package com.example.springbootdemo.dto;
 
-import com.example.springbootdemo.api.model.User;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;

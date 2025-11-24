@@ -4,7 +4,6 @@ import com.example.springbootdemo.api.model.User;
 import com.example.springbootdemo.dto.ResponseUserDTO;
 import com.example.springbootdemo.dto.UpdateUserDTO;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.ArrayList;
 import java.util.List;
