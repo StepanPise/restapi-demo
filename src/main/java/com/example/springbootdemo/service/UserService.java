@@ -3,7 +3,9 @@ package com.example.springbootdemo.service;
 import com.example.springbootdemo.api.model.User;
 import com.example.springbootdemo.dto.ResponseUserDTO;
 import com.example.springbootdemo.dto.UpdateUserDTO;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,7 +37,7 @@ public class UserService {
                 return newResponseUserDTO;
             }
         }
-        return null;
+        throw new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found");
     }
 
     public List<ResponseUserDTO> getAllUsers() {
@@ -57,8 +59,10 @@ public class UserService {
         for (User u : users) {
             if (u.getId() == id) {
                 users.remove(u);
+                return;
             }
         }
+        throw new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found");
     }
 
     public User updateUser(Integer id, UpdateUserDTO updateUserDTO) {
@@ -71,7 +75,7 @@ public class UserService {
                 return newUser;
             }
         }
-        return null;
+        throw new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found");
     }
 
 
