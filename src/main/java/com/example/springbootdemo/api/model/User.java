@@ -2,38 +2,46 @@ package com.example.springbootdemo.api.model;
 
 import com.example.springbootdemo.dto.CreateUserDTO;
 import com.example.springbootdemo.dto.UpdateUserDTO;
+import jakarta.persistence.*;
 
+@Entity
+@Table(name = "users")
 public class User {
 
-    private int id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
     private String name;
     private int age;
     private String email;
     private String password;
 
-    public User(int id, String name, int age, String email, String password) {
-        this.id = id;
+
+    public User() {
+    }
+
+    public User(String name, int age, String email, String password) {
         this.name = name;
         this.age = age;
         this.email = email;
         this.password = password;
     }
 
-    public User(int id, CreateUserDTO createUserDTO) {
-        this.id = id;
+    public User(CreateUserDTO createUserDTO) {
         this.name = createUserDTO.getName();
         this.age = createUserDTO.getAge();
         this.email = createUserDTO.getEmail();
         this.password = createUserDTO.getPassword();
     }
 
-    public User(int id, UpdateUserDTO updateUserDTO) {
-        this.id = id;
+    public User(UpdateUserDTO updateUserDTO) {
         this.name = updateUserDTO.getName();
         this.age = updateUserDTO.getAge();
         this.email = updateUserDTO.getEmail();
         this.password = updateUserDTO.getPassword();
     }
+
+
 
 
     public int getId() {

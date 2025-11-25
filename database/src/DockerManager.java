@@ -6,9 +6,9 @@ public class DockerManager {
 
   public static void main(String[] args) {
     BootUpDatabase();
-    // TurnOffDatabase();
+//     TurnOffDatabase();
     //ResetDatabaseData();
-    //ResetAndBoot();
+//    ResetAndBoot();
   }
 
   private static void BootUpDatabase() {

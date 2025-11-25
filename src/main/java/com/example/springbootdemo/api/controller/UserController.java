@@ -24,7 +24,7 @@ public class UserController {
 
     @PostMapping
     public User addUser(@Valid @RequestBody CreateUserDTO createUserDTO) {
-        User newUser = new User(userService.generateID(), createUserDTO);
+        User newUser = new User(createUserDTO);
 
         return userService.addUser(newUser);
     }
