@@ -4,6 +4,9 @@ import com.example.springbootdemo.dto.CreateUserDTO;
 import com.example.springbootdemo.dto.UpdateUserDTO;
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 @Table(name = "users")
 public class User {
@@ -16,9 +19,10 @@ public class User {
     private String email;
     private String password;
 
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private List<Ticket> tickets = new ArrayList<>();
 
-    public User() {
-    }
+    public User() {}
 
     public User(String name, int age, String email, String password) {
         this.name = name;
@@ -40,9 +44,6 @@ public class User {
         this.email = updateUserDTO.getEmail();
         this.password = updateUserDTO.getPassword();
     }
-
-
-
 
     public int getId() {
         return id;
@@ -83,4 +84,13 @@ public class User {
     public void setPassword(String password) {
         this.password = password;
     }
+
+    public List<Ticket> getTickets() {
+        return tickets;
+    }
+
+    public void setTickets(List<Ticket> tickets) {
+        this.tickets = tickets;
+    }
+
 }

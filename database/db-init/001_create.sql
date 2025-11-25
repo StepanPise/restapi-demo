@@ -5,3 +5,17 @@ CREATE TABLE users (
     email VARCHAR(255) NOT NULL UNIQUE,
     password VARCHAR(255) NOT NULL
 );
+
+CREATE TABLE events (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    date TIMESTAMP NOT NULL,
+    location VARCHAR(255)
+);
+
+CREATE TABLE tickets (
+    id SERIAL PRIMARY KEY,
+    user_id INT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+    event_id INT NOT NULL REFERENCES events(id) ON DELETE CASCADE,
+    seat VARCHAR(50)
+);
