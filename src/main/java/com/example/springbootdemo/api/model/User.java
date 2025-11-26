@@ -2,6 +2,7 @@ package com.example.springbootdemo.api.model;
 
 import com.example.springbootdemo.dto.CreateUserDTO;
 import com.example.springbootdemo.dto.UpdateUserDTO;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 
 import java.util.ArrayList;
@@ -20,6 +21,7 @@ public class User {
     private String password;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    @JsonBackReference
     private List<Ticket> tickets = new ArrayList<>();
 
     public User() {}

@@ -1,5 +1,6 @@
 package com.example.springbootdemo.api.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 
 
@@ -16,6 +17,7 @@ public class Ticket  {
 
     @ManyToOne
     @JoinColumn(name = "event_id")
+    @JsonBackReference
     private Event event;
 
     private String seat;

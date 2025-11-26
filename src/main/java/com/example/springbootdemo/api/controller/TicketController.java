@@ -1,6 +1,5 @@
 package com.example.springbootdemo.api.controller;
 
-import com.example.springbootdemo.api.model.Event;
 import com.example.springbootdemo.api.model.Ticket;
 import com.example.springbootdemo.service.TicketService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,12 +9,12 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/tickets")
-public class TickerController {
+public class TicketController {
 
     private final TicketService ticketService;
 
     @Autowired
-    public TickerController(TicketService ticketService) {
+    public TicketController(TicketService ticketService) {
         this.ticketService = ticketService;
     }
 
@@ -28,7 +27,19 @@ public class TickerController {
         return ticketService.getTicketById(id);
     }
 
-    @PostMapping
+    @GetMapping("/user/{id}")
+    public List<Ticket> getUserTickets(@PathVariable Integer id) {
+        return ticketService.getUserTickets(id);
+    }
+
+    @GetMapping("/event/{id}")
+    public List<Ticket> getEventTickets(@PathVariable Integer id) {
+        return ticketService.getEventTickets(id);
+    }
+
+    //request param in url -> later make DTO
+    //http://localhost:8080/tickets/buy?userId=1&eventId=1&seat=B1 -> example
+    @PostMapping("/buy")
     public Ticket buyTicket(@RequestParam Integer userId,
                             @RequestParam Integer eventId,
                             @RequestParam String seat){
@@ -39,5 +50,10 @@ public class TickerController {
     @PostMapping
     public Ticket createTicket(@RequestBody Ticket ticket) {
         return ticketService.createTicket(ticket);
+    }
+
+    @DeleteMapping("/{id}")
+    public void deleteTicket(@PathVariable Integer id) {
+        ticketService.deleteTicket(id);
     }
 }

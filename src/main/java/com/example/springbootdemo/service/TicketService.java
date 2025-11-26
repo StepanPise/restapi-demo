@@ -8,9 +8,10 @@ import com.example.springbootdemo.repository.EventRepository;
 import com.example.springbootdemo.repository.TicketRepository;
 import com.example.springbootdemo.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.server.ResponseStatusException;
+
 
 import java.util.List;
 
@@ -36,14 +37,34 @@ public class TicketService {
         return ticketRepository.getReferenceById(id);
     }
 
+    public List<Ticket> getUserTickets(Integer userId) {
+        return ticketRepository.findByUserId(userId);
+    }
+
+    public List<Ticket> getEventTickets(Integer eventId) {
+        return ticketRepository.findByEventId(eventId);
+    }
+
     public Ticket createTicket(Ticket ticket) {
         return ticketRepository.save(ticket);
     }
 
     public Ticket buyTicket(Integer userId, Integer eventId, String seat) {
-        User user = userRepository.getReferenceById(userId);
-        Event event = eventRepository.getReferenceById(eventId);
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found"));
 
+        Event event = eventRepository.findById(eventId)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Event not found"));
 
+        Ticket ticket = new Ticket();
+        ticket.setUser(user);
+        ticket.setEvent(event);
+        ticket.setSeat(seat);
+
+        return ticketRepository.save(ticket);
+    }
+
+    public void deleteTicket(Integer id) {
+        ticketRepository.deleteById(id);
     }
 }

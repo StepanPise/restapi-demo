@@ -1,5 +1,6 @@
 package com.example.springbootdemo.api.model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
@@ -18,6 +19,7 @@ public class Event {
     private String location;
 
     @OneToMany(mappedBy = "event", cascade = CascadeType.ALL)
+    @JsonManagedReference
     private List<Ticket> tickets = new ArrayList<>();
 
     public Event(){}

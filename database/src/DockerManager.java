@@ -5,10 +5,10 @@ import java.io.InputStreamReader;
 public class DockerManager {
 
   public static void main(String[] args) {
-    BootUpDatabase();
+    //BootUpDatabase();
     //TurnOffDatabase();
     // ResetDatabaseData();
-    //ResetAndBoot();
+    ResetAndBoot();
   }
 
   private static void BootUpDatabase() {

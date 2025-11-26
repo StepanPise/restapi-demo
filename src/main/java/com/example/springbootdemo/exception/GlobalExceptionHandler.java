@@ -19,4 +19,6 @@ public class GlobalExceptionHandler {
         return new ResponseEntity<>("Runtime error: " + ex.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
+
+
 }
