@@ -4,7 +4,9 @@ package com.example.springbootdemo.service;
 import com.example.springbootdemo.api.model.Event;
 import com.example.springbootdemo.repository.EventRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
@@ -29,4 +31,20 @@ public class EventService {
     public Event createEvent(Event event) {
         return eventRepository.save(event);
     }
+
+    public void deleteEvent(Integer id) {
+        eventRepository.deleteById(id);
+    }
+
+    public Event updateEvent(Integer id, Event event) {
+        Event existingEvent = eventRepository.findById(id)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Event not found"));
+
+        existingEvent.setName(event.getName());
+        existingEvent.setDate(event.getDate());
+        existingEvent.setLocation(event.getLocation());
+
+        return eventRepository.save(existingEvent);
+    }
+
 }
